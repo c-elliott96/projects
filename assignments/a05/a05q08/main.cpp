@@ -116,6 +116,19 @@ void test_init_and_print_world()
 }
 
 
+void test_set()
+{
+    char world[10][10];
+    init(world);
+    int x = 0;
+    int y = 0;
+    char c = ' ';
+    std::cin >> x >> y >> c;
+    set(world, x, y, c);
+    print(world);
+}
+
+
 int main()
 {
     //int seed;
@@ -149,6 +162,9 @@ int main()
             break;
         case 8:
             test_init_and_print_world();
+            break;
+        case 9:
+            test_set();
             break;
     }
     

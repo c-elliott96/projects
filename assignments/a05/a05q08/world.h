@@ -43,6 +43,7 @@ Returns true exactly when world[x][y] is not a space.
 
 void init(char world[10][10]);
 void print(char world[10][10]);
+void set(char world[10][10]);
 
 #endif
 

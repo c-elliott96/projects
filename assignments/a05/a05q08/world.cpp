@@ -30,15 +30,14 @@ bool wall_collision(int x, int y, int direction, char world[10][10])
     {
         case 0: // building wall north
         { 
-            for (int i = y; i > y - 4; --y)
+            for (int i = y; i > y - 4; --i)
             {
                 if (world[i][y] != ' ')
                 {
                     return false;
                 }
-                else
-                    return true;
             }
+            return true;
             break;
         }
         case 1: // building wall south
@@ -49,9 +48,8 @@ bool wall_collision(int x, int y, int direction, char world[10][10])
                 {
                     return false;
                 }
-                else
-                    return true;
             }
+            return true;
             break;
         }
         case 2: // building wall east
@@ -62,9 +60,8 @@ bool wall_collision(int x, int y, int direction, char world[10][10])
                 {
                     return false;
                 }
-                else
-                    return true;
             }
+            return true;
             break;
         }
         case 3: // building wall west
@@ -75,9 +72,8 @@ bool wall_collision(int x, int y, int direction, char world[10][10])
                 {
                     return false;
                 }
-                else
-                    return true;
             }
+            return true;
             break;
         }
     }
@@ -90,7 +86,7 @@ void fill_wall(int x, int y, int direction, char world[10][10])
     {
         case 0: // building wall north
         { 
-            for (int i = y; i > y - 4; --y)
+            for (int i = y; i > y - 4; --i)
             {
                 if (world[i][y] == ' ')
                 {
@@ -103,7 +99,10 @@ void fill_wall(int x, int y, int direction, char world[10][10])
         { 
             for (int i = y; i < y + 4; ++i)
             {
-                world[i][y] = 'X';
+                if (world[i][y] == ' ')
+                {
+                    world[i][y] = 'X';
+                }
             }
             break;
         }
@@ -111,7 +110,10 @@ void fill_wall(int x, int y, int direction, char world[10][10])
         {
             for (int i = x; i < x + 4; ++i)
             {
-                world[x][i] = 'X';
+                if (world[x][i] == ' ')
+                {
+                    world[x][i] = 'X';
+                }
             }
             break;
         }
@@ -119,7 +121,10 @@ void fill_wall(int x, int y, int direction, char world[10][10])
         {
             for (int i = x; i > x - 4; --i)
             {
-                world[x][i] = 'X';
+                if (world[x][i] == ' ')
+                {
+                    world[x][i] = 'X';
+                }
             }
             break;
         }
@@ -133,7 +138,7 @@ bool in_bounds_check(int x, int y, int direction)
     {
         case 0: // building wall north
         {
-            if (y >= 3)
+            if (y >= 4)
                 return true;
             else
                 return false;
@@ -141,7 +146,7 @@ bool in_bounds_check(int x, int y, int direction)
         }
         case 1: // building wall south
         {
-            if (y <= 6)
+            if (y <= 5)
                 return true;
             else
                 return false;
@@ -149,7 +154,7 @@ bool in_bounds_check(int x, int y, int direction)
         }
         case 2: // building wall east
         {
-            if (x <= 6)
+            if (x <= 5)
                 return true;
             else
                 return false;
@@ -157,7 +162,7 @@ bool in_bounds_check(int x, int y, int direction)
         }
         case 3: // building wall west
         {
-            if (x >= 3)
+            if (x >= 4)
                 return true;
             else
                 return false;
@@ -187,15 +192,33 @@ void init(char world[10][10])
     y1 = rand_coordinate(y1);
     x2 = rand_coordinate(x2);
     y2 = rand_coordinate(y2);
+
+    while (x1 == x2)
+    {
+        x1 = rand_coordinate(x1);
+    }
+
+    while (y1 == y2)
+    {
+        y1 = rand_coordinate(x1);
+    }
     
     int direction_wall_1, direction_wall_2;
 
     direction_wall_1 = rand() % 4;
     direction_wall_2 = rand() % 4;
 
+    /*
+    std::cout << "direction of 1: " << direction_wall_1 << ' ';
+    std::cout << "direction of 2: " << direction_wall_2 << ' ' << std::endl;
+    std::cout << "coordinates of 1: " << x1 << ' ' << y1 << std::endl;
+    std::cout << "coordinates of 2: " << x2 << ' ' << y2 << std::endl;
+    */
+    
     while (!(in_bounds_check(x1, y1, direction_wall_1)))
     {
         direction_wall_1 = rand() % 4;
+        std::cout << "in while loop 1" << std::endl;
     }    
 
     fill_wall(x1, y1, direction_wall_1, world);
@@ -203,14 +226,34 @@ void init(char world[10][10])
     while (!(in_bounds_check(x2, y2, direction_wall_2)))
     {
         direction_wall_2 = rand() % 4;
+        x2 = rand_coordinate(x2);
+        y2 = rand_coordinate(y2);
+        std::cout << "in while loop 2" << std::endl;
     }
     
     while(!wall_collision(x2, y2, direction_wall_2, world))
     {
+        std::cout << "in while loop 3" << std::endl;
         x2 = rand_coordinate(x2);
         y2 = rand_coordinate(y2);
         direction_wall_2 = rand() % 4;
+        while (!(in_bounds_check(x2, y2, direction_wall_2)))
+        {
+            x2 = rand_coordinate(x2);
+            y2 = rand_coordinate(y2);
+            direction_wall_2 = rand() % 4;
+            std::cout << "in while loop 4" << std::endl;
+        }
+        /*
+        x2 = rand_coordinate(x2);
+        y2 = rand_coordinate(y2);
+        direction_wall_2 = rand() % 4;
+        */
     }
+    std::cout << "direction of 1: " << direction_wall_1 << ' ';
+    std::cout << "direction of 2: " << direction_wall_2 << ' ' << std::endl;
+    std::cout << "coordinates of 1: " << x1 << ' ' << y1 << std::endl;
+    std::cout << "coordinates of 2: " << x2 << ' ' << y2 << std::endl;
 
     fill_wall(x2, y2, direction_wall_2, world);
 }
@@ -235,6 +278,18 @@ void print(char world[10][10])
         std::cout << "X\n";
     }
     std::cout << "  XXXXXXXXXXXX\n";   
+}
+
+
+void set(char world[10][10], int x, int y, char c)
+{
+    world[x][y] = c;
+}
+
+
+void clear(char world[10][10], int x, int y)
+{
+    
 }
 
 // Other functions ...
