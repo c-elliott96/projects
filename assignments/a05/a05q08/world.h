@@ -44,6 +44,9 @@ Returns true exactly when world[x][y] is not a space.
 void init(char world[10][10]);
 void print(char world[10][10]);
 void set(char world[10][10]);
+void clear(char world[10][10]);
+bool is_occupied(char world[10][10], int x, int y);
+bool is_unoccupied(char world[10][10], int x, int y);
 
 #endif
 

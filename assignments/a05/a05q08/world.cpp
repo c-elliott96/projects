@@ -1,7 +1,7 @@
 /******************************************************************************
 
 File: world.cpp
-Author:
+Author: Christian Elliott
 
 Implementation of world.h
 
@@ -10,6 +10,7 @@ Implementation of world.h
 #include <iostream>
 #include <ctime>
 #include "world.h"
+#include "PowerStation.h"
 
 
 int rand_coordinate(int &) // random coordinate for wall starting locations
@@ -289,7 +290,31 @@ void set(char world[10][10], int x, int y, char c)
 
 void clear(char world[10][10], int x, int y)
 {
-    
+    world[x][y] = ' ';
+}
+
+
+bool is_unoccupied(char world[10][10], int x, int y)
+{
+    if (world[x][y] != ' ')
+    {
+        return false;
+    }
+
+    else
+        return true;
+}
+
+
+bool is_occupied(char world[10][10], int x, int y)
+{
+    if (world[x][y] != ' ')
+    {
+        return true;
+    }
+
+    else
+        return false;
 }
 
 // Other functions ...

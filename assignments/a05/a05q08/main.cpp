@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include "Robot.h"
 #include "world.h"
+#include "PowerStation.h"
 
 void test_print()
 {
@@ -115,7 +116,7 @@ void test_init_and_print_world()
     print(world);
 }
 
-
+/*
 void test_set()
 {
     char world[10][10];
@@ -126,6 +127,22 @@ void test_set()
     std::cin >> x >> y >> c;
     set(world, x, y, c);
     print(world);
+}
+*/
+
+
+void test_init_and_print_power_station()
+{
+    int x = 0, y = 0;
+    int energylevel;
+    std::cin >> x >> y >> energylevel;
+    PowerStation ps;
+    init(ps, x, y, energylevel);
+    print(ps);
+
+    dec_energylevel(ps, 5);
+    print(ps);
+    return;
 }
 
 
@@ -163,8 +180,8 @@ int main()
         case 8:
             test_init_and_print_world();
             break;
-        case 9:
-            test_set();
+        case 10:
+            test_init_and_print_power_station();
             break;
     }
     
