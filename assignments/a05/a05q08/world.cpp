@@ -9,6 +9,8 @@ Implementation of world.h
 
 #include <iostream>
 #include <ctime>
+//#include "world.h"
+#include "Robot.h"
 #include "world.h"
 #include "PowerStation.h"
 
@@ -296,13 +298,13 @@ void clear(char world[10][10], int x, int y)
 
 bool is_unoccupied(char world[10][10], int x, int y)
 {
-    if (world[x][y] != ' ')
+    if (world[x][y] == ' ')
     {
-        return false;
+        return true;
     }
 
     else
-        return true;
+        return false;
 }
 
 
@@ -315,6 +317,122 @@ bool is_occupied(char world[10][10], int x, int y)
 
     else
         return false;
+}
+
+
+void init_gold(int x, int y, char world[10][10], int & gold_x, int  & gold_y)
+{
+    srand ((unsigned int) time(NULL));
+    x = rand() % 10;
+    y = rand() % 10;
+
+    while(is_occupied(world, x, y))
+    {
+        x = rand() % 10;
+        y = rand() % 10;
+    }
+    world[x][y] = 'G';
+    gold_x = x;
+    gold_y = y;
+}
+
+
+bool found_gold(const Robot & r, char world[10][10])
+{
+    // check north
+    if (world[r.x][r.y - 1] == 'G')
+    {
+        std::cout << "gold north" << '\n';
+        return true;
+    }
+
+    // check south
+    else if(world[r.x][r.y + 1] == 'G')
+    {
+        std::cout << "gold south" << '\n';
+        return true;
+    }
+    
+    // check east
+    else if(world[r.x + 1][r.y] == 'G')
+    {
+        std::cout << "gold east" << '\n';
+        return true;
+    }
+
+    // check west
+    else if(world[r.x - 1][r.y] == 'G')
+    {
+        std::cout << "gold west" << '\n';
+        return true;
+    }
+
+    // none of the above happened, return false
+    else
+        return false;
+}
+
+bool by_powerstation(Robot & r, char world[10][10])
+{
+    // check north
+    if (world[r.x][r.y - 1] == 'P')
+    {
+        // r.by_powerstation = true;
+        // if ((r.x == ps0.x) && (r.y - 1 == ps0.y))
+        // {
+            
+        // }
+        return true;
+    }
+
+    // check south
+    else if(world[r.x][r.y + 1] == 'P')
+    {
+        r.by_powerstation = true;
+        return true;
+    }
+
+    // check east
+    else if(world[r.x + 1][r.y] == 'P')
+    {
+        r.by_powerstation = true;
+        return true;
+    }
+
+    // check west
+    else if(world[r.x - 1][r.y] == 'P')
+    {
+        r.by_powerstation = true;
+        return true;
+    }
+
+    // none of the above happened, return false
+    else
+        return false;
+}
+
+
+void move_bot(Robot & r, char world [10][10])
+{
+    srand ((unsigned int) time(NULL));
+    int d;
+    d = rand() % 4;
+    switch(d)
+    {
+        case 0:
+            move_north(r, world);
+            break;
+        case 1:
+            move_south(r, world);
+            break;
+        case 2:
+            move_east(r, world);
+            break;
+        case 3:
+            move_west(r, world);
+            break;
+    }
+    return;
 }
 
 // Other functions ...

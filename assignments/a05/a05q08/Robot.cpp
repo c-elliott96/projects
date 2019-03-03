@@ -3,14 +3,31 @@
 
 
 #include <iostream>
+//#include "world.h"
 #include "Robot.h"
+#include "world.h"
+#include "PowerStation.h"
 
-void init(Robot & r, char name, int x, int y, int energylevel)
+
+void init(Robot & r, int x, int y, char world[10][10])
 {
-    r.name = name;
-    r.x = x;
-    r.y = y;
-    r.energylevel = energylevel;
+    // r.name = name;
+    // r.x = x;
+    // r.y = y;
+    char name = r.name;
+    
+    srand ((unsigned int) time(NULL));
+    r.x = rand() % 10;
+    r.y = rand() % 10;
+    r.energylevel = 100;
+
+    while(is_occupied(world, r.x, r.y))
+    {
+        r.x = rand() % 10;
+        r.y = rand() % 10;
+    }
+
+    world[r.x][r.y] = name;
 }
 
 
@@ -27,7 +44,7 @@ void print(const Robot & robot)
 }
 
 
-void move_north(Robot & robot)
+void move_north(Robot & robot, char world[10][10])
 {
     if (robot.energylevel < 1)
     {
@@ -36,13 +53,17 @@ void move_north(Robot & robot)
 
     else
     {
+        // if (is_occupied(world, robot.x, robot.y -1))
+        // {
+        //     return;
+        // }
         --robot.y;
         --robot.energylevel;
     }
 }
 
 
-void move_south(Robot & robot)
+void move_south(Robot & robot, char world[10][10])
 {
     if (robot.energylevel < 1)
     {
@@ -51,13 +72,17 @@ void move_south(Robot & robot)
 
     else
     {
+        // if (is_occupied(world, robot.x, robot.y + 1))
+        // {
+        //     return;
+        // }
         ++robot.y;
         --robot.energylevel;
     }
 }
 
 
-void move_east(Robot & robot)
+void move_east(Robot & robot, char world[10][10])
 {
     if (robot.energylevel < 1)
     {
@@ -66,13 +91,17 @@ void move_east(Robot & robot)
 
     else
     {
+        // if (is_occupied(world, robot.x + 1, robot.y))
+        // {
+        //     return;
+        // }
         ++robot.x;
         --robot.energylevel;
     }
 }
 
 
-void move_west(Robot & robot)
+void move_west(Robot & robot, char world[10][10])
 {
     if (robot.energylevel < 1)
     {
@@ -81,6 +110,10 @@ void move_west(Robot & robot)
 
     else
     {
+        // if (is_occupied(world, robot.x - 1, robot.y))
+        // {
+        //     return;
+        // }
         --robot.x;
         --robot.energylevel;
     }

@@ -47,6 +47,10 @@ void set(char world[10][10]);
 void clear(char world[10][10]);
 bool is_occupied(char world[10][10], int x, int y);
 bool is_unoccupied(char world[10][10], int x, int y);
+void init_gold(int x, int y, char world[10][10], int & gold_x, int & gold_y);
+bool found_gold(const Robot & robot, char world[10][10]);
+void move_bot(Robot & r, char world[10][10]);
+bool by_powerstation(Robot & r, char world[10][10]);
 
 #endif
 

@@ -39,14 +39,15 @@ struct Robot
     char name;
     int x, y;
     int energylevel;
+    bool by_powerstation;
 };
 
-void init(Robot & r, char name, int x, int y, int energylevel);
+void init(Robot & r, int x, int y, char world[10][10]);
 void print(const Robot & robot);
-void move_north(Robot & robot);
-void move_south(Robot & robot);
-void move_east(Robot & robot);
-void move_west(Robot & robot);
+void move_north(Robot & robot, char world[10][10]);
+void move_south(Robot & robot, char world[10][10]);
+void move_east(Robot & robot, char world[10][10]);
+void move_west(Robot & robot, char world[10][10]);
 void inc_energylevel(Robot & robot, int d);
 void dec_energylevel(Robot & robot, int d);
 
