@@ -155,6 +155,24 @@ void test_set()
 }
 
 
+void test_get_int()
+{
+    int n, d;
+    std::cin >> n >> d;
+    std::cout << get_int(get_Fraction(n, d)) << std::endl;
+    return;
+}
+
+
+void test_get_double()
+{
+    int n, d;
+    std::cin >> n >> d;
+    std::cout << get_double(get_Fraction(n, d)) << std::endl;
+    return;
+}
+
+
 int main()
 {
     int option;
@@ -203,6 +221,12 @@ int main()
             break;
         case 14:
             test_set();
+            break;
+        case 15:
+            test_get_int();
+            break;
+        case 16:
+            test_get_double();
             break;
     }
 

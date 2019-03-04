@@ -32,6 +32,9 @@ void set_d(Fraction & r, int new_d); // set r.d to new_d
 void set(Fraction & r, int new_n, int new_d); // sets both n and d of r
 // with the new values
 
+int get_int(const Fraction & f);
+double get_double(const Fraction & f);
+
 
 #endif
 

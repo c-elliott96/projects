@@ -155,6 +155,52 @@ void test_set()
 }
 
 
+void test_get_int()
+{
+    int n, d;
+    std::cin >> n >> d;
+    std::cout << get_int(get_Fraction(n, d)) << std::endl;
+    return;
+}
+
+
+void test_get_double()
+{
+    int n, d;
+    std::cin >> n >> d;
+    std::cout << get_double(get_Fraction(n, d)) << std::endl;
+    return;
+}
+
+
+void test_addeq()
+{
+    int n0, d0;
+    int n1, d1;
+    std::cin >> n0 >> d0;
+    std::cin >> n1 >> d1;
+    Fraction f = get_Fraction(n0, d0);
+    Fraction g = get_Fraction(n1, d1);
+    f += g;
+    std::cout << f << std::endl;
+    return;
+}
+
+
+void test_subtracteq()
+{
+    int n0, d0;
+    int n1, d1;
+    std::cin >> n0 >> d0;
+    std::cin >> n1 >> d1;
+    Fraction f = get_Fraction(n0, d0);
+    Fraction g = get_Fraction(n1, d1);
+    f -= g;
+    std::cout << f << std::endl;
+    return;
+}
+
+
 int main()
 {
     int option;
@@ -203,6 +249,18 @@ int main()
             break;
         case 14:
             test_set();
+            break;
+        case 15:
+            test_get_int();
+            break;
+        case 16:
+            test_get_double();
+            break;
+        case 17:
+            test_addeq();
+            break;
+        case 18:
+            test_subtracteq();
             break;
     }
 

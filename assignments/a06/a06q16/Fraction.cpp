@@ -333,3 +333,17 @@ void set(Fraction & r, int new_n, int new_d)
     r.n = new_n;
     r.d = new_d;
 }
+
+
+int get_int(const Fraction & f)
+{
+    int x = (int)f.n / f.d;
+    return x;
+}
+
+
+double get_double(const Fraction & f)
+{
+    double x = (double)f.n / f.d;
+    return x;
+}

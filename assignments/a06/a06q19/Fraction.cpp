@@ -333,3 +333,41 @@ void set(Fraction & r, int new_n, int new_d)
     r.n = new_n;
     r.d = new_d;
 }
+
+
+int get_int(const Fraction & f)
+{
+    int x = (int)f.n / f.d;
+    return x;
+}
+
+
+double get_double(const Fraction & f)
+{
+    double x = (double)f.n / f.d;
+    return x;
+}
+
+
+Fraction operator+=(Fraction & f, const Fraction & g)
+{
+    f.n = f.n * g.d + g.n * f.d;
+    f.d = f.d * g.d;
+    return f;
+}
+
+
+Fraction operator-=(Fraction & f, const Fraction & g)
+{
+    f.n = f.n * g.d - g.n * f.d;
+    f.d = f.d * g.d;
+    return f;
+}
+
+
+Fraction operator*=(Fraction & f, const Fraction & g)
+{
+    f.n = f.n * g.n;
+    f.d = f.d * g.d;
+    return f;
+}
